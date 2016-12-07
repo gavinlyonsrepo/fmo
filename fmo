@@ -13,9 +13,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
+have_orphans=0
+
 for i in $(pacman -Qmq); do
         status=`cower -i $i | grep Maintainer | awk '{split($0,a,": "); print a[2]}'`
         if [ "$status" == "(orphan)" ]; then
                 echo $i
+                have_orphans=1
         fi
 done
+
+if [ $have_orphans -eq 0 ]; then
+        echo "No AUR orphans found!"
+fi
