@@ -16,7 +16,7 @@
 have_orphans=0
 
 for i in $(pacman -Qmq); do
-        status=`cower -i -b --format %m $i`
+        status=`cower -i  --format %m $i`
         if [ "$status" == "(orphan)" ]; then
                 echo $i
                 have_orphans=1
